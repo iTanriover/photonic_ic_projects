@@ -30,12 +30,12 @@ The FDE solver was used to calculate the two coupled supermodes of the direction
 ### Gap dependence
 Increasing the gap reduces the coupling coefficient and therefore increases the coupling length required for 50/50 power transfer.
 The calculated 50/50 coupling length increases from approximately $$5\ \mathrm{\mu m}$$ at a $$100\ \mathrm{nm}$$ gap to approximately $$19\ \mathrm{\mu m}$$ at a $$250\ \mathrm{nm}$$ gap.  
-**Gap versus coupling length**
-![Gap_vs_coupling_length](figures/coupling_vs_width_variation.jpg)  
+**Gap versus coupling length**  
+![Gap_vs_coupling_length](figures/gap_vs_50_percent_coupling_length.jpg)  
 ### Waveguide-width dependence
 The waveguide width was varied by approximately $$\pm20\ \mathrm{nm}$$ around the nominal width of $$450\ \mathrm{nm}$$.
 **WG width versus coupling coefficient**
-![Width_vs_coupling_coeff](figures/gap_vs_50_percent_coupling_length.jpg)  
+![Width_vs_coupling_coeff](figures/coupling_vs_width_variation.jpg)  
 ### Wavelength-dependent splitting
 The wavelength response was calculated using the extracted coupling coefficient and the selected coupling length.
 The through-port power decreases with wavelength while the coupled-port power increases. The two output powers cross close to the 50/50 splitting point, demonstrating wavelength-dependent power division.
