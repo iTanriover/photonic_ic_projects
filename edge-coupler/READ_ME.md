@@ -14,7 +14,7 @@ This project demonstrates the design and simulation of a silicon-photonic direct
 
 ## Main result
 
-![Bent coupler transmission](edge_coupler/figures/Bend_WG_XY_cross_section.jpg)
+![Bent coupler transmission](edge_coupler/figures/Bend_WG_cross_section.jpg)
 
 ## Detailed project summary
 
