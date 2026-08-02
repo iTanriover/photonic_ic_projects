@@ -36,10 +36,6 @@ The calculated 50/50 coupling length increases from approximately $$5\ \mathrm{\
 The waveguide width was varied by approximately $$\pm20\ \mathrm{nm}$$ around the nominal width of $$450\ \mathrm{nm}$$.
 **WG width versus coupling coefficient**
 ![Width_vs_coupling_coeff](figures/coupling_vs_width_variation.jpg)  
-### Wavelength-dependent splitting
-The wavelength response was calculated using the extracted coupling coefficient and the selected coupling length.
-The through-port power decreases with wavelength while the coupled-port power increases. The two output powers cross close to the 50/50 splitting point, demonstrating wavelength-dependent power division.
-
 ### Robustness to dimensional variations
 The effect of dimensional variations was evaluated by independently varying the waveguide width and gap around their nominal values.
 These results show the sensitivity of the nominal coupling design to fabrication-related variations in waveguide width and separation.
@@ -51,7 +47,10 @@ A 100-sample Monte Carlo analysis was performed by randomly varying:
 • Waveguide 2 width  
 • Waveguide gap  
 The coupling length was kept fixed, and the coupling coefficient was recalculated for every geometry.  
-The Monte Carlo results provide a statistical estimate of the expected coupling-coefficient variation caused by dimensional deviations.
+The Monte Carlo results provide a statistical estimate of the expected coupling-coefficient variation caused by dimensional deviations.  
+![MonteCarloParameters](figures/Monte Carlo Histograms.jpg)  
+![MonteCarloScatterPlot](figures/Monte Carlo scatter plot.jpg)  
+
 | Metric | Result |
 |--------|--------|
 | Number of samples | 100 |
@@ -70,15 +69,19 @@ The ideal parallel-waveguide structure was simulated using FDTD. Power transfer 
 The FDE model provides the coupling period through the extracted coupling coefficient:  
 $P_{\mathrm{cross}}(L)=\sin^2(CL)$  
 The straight-waveguide FDTD simulation was used to verify this analytical coupling behavior.
+![FDEvsFDTD](figures/straight_WG_coupling_FDE_FDTD_comparision.jpg)  
+
 ## Bent-transition coupler
 A more realistic structure was then simulated, with the waveguides bending toward the coupling region and separating after the interaction region.
-The broadband FDTD simulation produced the wavelength-dependent transmission at the through and coupled ports.
 The 50/50 coupling length obtained from the bent-device FDTD simulation was approximately $$6.4\ \mathrm{\mu m}$$, compared with approximately $$7.96\ \mathrm{\mu m}$$ predicted by the ideal parallel-waveguide FDE model.
 This difference is attributed to effects included in the full FDTD geometry but not in the ideal FDE model, including:  
 • Bend transitions  
 • Mode evolution before the coupling region  
 • Mode mismatch at the coupling-region entrance  
 • Effective interaction-length differences  
+![FDTD_field](figures/Bend_WG_XY_cross_section.jpg)  
+The broadband FDTD simulation produced the wavelength-dependent transmission at the through and coupled ports.  
+![FDTD_wavelength](figures/FDTD_Coupling_vs_Wavelength.jpg)  
 
 ### Key results
 
@@ -96,24 +99,3 @@ This difference is attributed to effects included in the full FDTD geometry but 
 • Ansys Lumerical FDE  
 • Ansys Lumerical FDTD  
 • MATLAB  
-• GitHub  
-
-### Repository structure
-directional-coupler/  
-├── README.md  
-├── figures/  
-│   ├── even_mode_profile.jpg  
-│   ├── odd_mode_profile.jpg  
-│   ├── gap_vs_50_percent_coupling_length.jpg  
-│   ├── gap_vs_coupling_coefficient.png  
-│   ├── width_vs_coupling_coefficient.png  
-│   ├── wavelength_vs_coupling.png  
-│   ├── monte_carlo_3d_scatter.png  
-│   ├── monte_carlo_histograms.png  
-│   └── bent_coupler_transmission.png  
-├── scripts/  
-│   ├── lumerical/  
-├── simulation files/ 
-│   ├── odd_mode_profile.jpg  
-│   ├── gap_vs_50_percent_coupling_length.jpg   
- 
