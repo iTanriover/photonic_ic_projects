@@ -1,0 +1,42 @@
+### return to default 
+coupler_layout;
+clear;
+
+# Width sweep the coupling coefficient for tolerance analysis
+
+gap = 150e-9;
+wavelength = 1550e-9;
+
+select('FDE');
+set('wavelength',wavelength);
+
+width_vector = [430:5:470]*1e-9;
+
+C= matrix(length(width_vector));
+n_eff1= matrix(length(width_vector));
+n_eff2= matrix(length(width_vector));
+
+for(i=1:length(width_vector)){
+    wg_width = width_vector(i); 
+    switchtolayout;
+    select('through wg');
+    setnamed('through wg::straight wg','y span', wg_width);
+    set('y',(wg_width + gap)/2);
+    
+    select('coupled wg');
+    setnamed('coupled wg::straight wg','y span', wg_width);
+    set('y',-(wg_width + gap)/2);
+        
+    run;
+    findmodes;
+
+    n_eff1(i) = getdata("FDE::data::mode1", "neff");
+    n_eff2(i) = getdata("FDE::data::mode2", "neff");
+
+    dn = n_eff1(i) - n_eff2(i);
+
+    C(i) = pi*dn/wavelength; # coupling coefficient
+    }
+
+matlabsave('width_sweep');
+

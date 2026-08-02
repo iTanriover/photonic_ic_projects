@@ -1,0 +1,40 @@
+### return to default 
+coupler_layout;
+clear;
+
+# Gap sweep the coupling coefficient
+switchtolayout;
+
+wg_width = 0.45e-6;
+wavelength = 1550e-9;
+
+select('FDE');
+set('wavelength',wavelength);
+
+gap_vector = [100:25:250]*1e-9;
+
+C= matrix(length(gap_vector));
+n_eff1= matrix(length(gap_vector));
+n_eff2= matrix(length(gap_vector));
+for(i=1:length(gap_vector)){
+    gap = gap_vector(i); 
+    switchtolayout;
+    select('through wg');
+    set('y',(wg_width+gap)/2);
+    
+    select('coupled wg');
+    set('y',-(wg_width+gap)/2);
+        
+    run;
+    findmodes;
+
+    n_eff1(i) = getdata("FDE::data::mode1", "neff");
+    n_eff2(i) = getdata("FDE::data::mode2", "neff");
+
+    dn = n_eff1(i) - n_eff2(i);
+
+    C(i) = pi*dn/wavelength; # coupling coefficient
+    }
+
+matlabsave('gap_sweep');
+
