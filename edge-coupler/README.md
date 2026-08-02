@@ -48,7 +48,7 @@ A 100-sample Monte Carlo analysis was performed by randomly varying:
 • Waveguide gap  
 The coupling length was kept fixed, and the coupling coefficient was recalculated for every geometry.  
 The Monte Carlo results provide a statistical estimate of the expected coupling-coefficient variation caused by dimensional deviations.  
-![MonteCarloParameters](figures/Monte_Carlo_Histograms.jpg)  
+![MonteCarloParameters](figures/Monte_Carlo_histograms.jpg)  
 ![MonteCarloScatterPlot](figures/Monte_Carlo_scatter_plot.jpg)  
 
 | Metric | Result |
