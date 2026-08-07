@@ -16,7 +16,7 @@ This project demonstrates the design and simulation of a silicon-photonic direct
 ![FDTD_field](figures/Bend_WG_XY_cross_section.jpg)  
 ## Detailed project summary
 
-See ![Summary.md](Summary.md).
+See [Summary.md](Summary.md).
 
 ## Repository contents
 
