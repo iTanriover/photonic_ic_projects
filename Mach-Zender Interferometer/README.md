@@ -10,7 +10,7 @@ $$
 
 where $\Delta L$ is the arm-length difference.
 
-The MZIs were designed using the 50/50 [directional coupler](./directional_coupler/) previously designed for beam splitting and guiding. This project investigates how the arm-length imbalance and common arm length affect the spectral response, free spectral range (FSR), finesse, and output power splitting.
+The MZIs were designed using the 50/50 [directional coupler](../directional_coupler/) previously designed for beam splitting and guiding. This project investigates how the arm-length imbalance and common arm length affect the spectral response, free spectral range (FSR), finesse, and output power splitting.
 
 The target FSR and phase difference were achieved through automated parameter sweeps. The final design was tuned to achieve approximately 50/50 output splitting at 1550 nm.
 
@@ -35,7 +35,7 @@ The target FSR and phase difference were achieved through automated parameter sw
 
 See the full analysis in:
 
-[Project summary](PROJECT_SUMMARY.md)
+[Project summary](Summary.md)
 
 ## Repository Contents
 
