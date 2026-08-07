@@ -1,7 +1,8 @@
 # Mach–Zehnder Interferometer Design
-Design and simulation of passive silicon-photonic Mach–Zehnder interferometers using Lumerical and MATLAB.
+Design and simulation of passive silicon-photonic Mach–Zehnder interferometers (MZIs) using Lumerical and MATLAB.
 
-The project investigates how arm-length imbalance and common arm length affect the spectral response, finesse, and power splitting of an MZI. The final design was tuned to achieve approximately 50/50 output splitting at 1550 nm.
+We designed MZIs using the 50/50  [directional coupler](https://chat.asksage.anl.gov/PROJECT_SUMMARY.md) that is designed on the previous project, for beam splitting and guiding 
+The target FSR and delta_phi was achieved through automated parameter sweepsThe project investigates how arm-length imbalance and common arm length affect the spectral response, finesse, and power splitting of an MZI. The final design was tuned to achieve approximately 50/50 output splitting at 1550 nm.
 
 ### Final Design Targets
 | Parameter | Value |
