@@ -81,6 +81,72 @@ The balanced structure provides a reference for evaluating:
 | **Finesse**               | [Insert value] |
 | **Excess loss**           | [Insert value] |
 
+## Group-Index and Arm-Length-Difference Design
+
+The group index was calculated from the wavelength-dependent effective index of the fundamental TE-like waveguide mode:
+
+$$n_g(\lambda) = n_{\mathrm{eff}}(\lambda) - \lambda \frac{d n_{\mathrm{eff}}}{d\lambda}$$
+
+
+The effective index was obtained using the Lumerical FDE solver over the wavelength range of interest. The wavelength derivative was calculated using a central finite difference:
+
+
+$$n_g(\lambda_0) \approx n_{\mathrm{eff}}(\lambda_0) - \lambda_0 \frac{n_{\mathrm{eff}}(\lambda_0+\Delta\lambda) - n_{\mathrm{eff}}(\lambda_0-\Delta\lambda)}{2\Delta\lambda}$$
+
+The calculated group index at the design wavelength was:
+
+| Parameter             | Value          |
+| --------------------- | -------------- |
+| **Design wavelength** | 1550 nm        |
+| **Effective index**   | 2.3515         |
+| **Group index**       | 4.3306         |
+| **Wavelength step**   | 1 nm           |
+
+For an unbalanced MZI, the free spectral range (FSR) is approximately:
+
+$$\mathrm{FSR} \approx \frac{\lambda_0^2}{n_g\Delta L} $$
+
+where:
+
+* $\lambda_0$ is the design wavelength
+* $n_g$ is the waveguide group index
+* $\Delta L$ is the arm-length difference
+
+The required arm-length difference for a target FSR was calculated using:  
+
+$\Delta L \approx \frac{\lambda_0^2}{n_g,\mathrm{FSR}}$
+
+Using:
+
+* $\lambda_0 = 1550$ nm
+* $n_g \approx 4.33$
+* Target FSR = 25 nm
+
+gives:
+
+$\Delta L \approx \frac{(1550\ \mathrm{nm})^2} {(4.33)(25\ \mathrm{nm})} \approx 22.35\ \mu\mathrm{m}$
+
+Yet, this calculation doesn't include the required phase difference $\Delta \phi$. Combining the phase shift - arm imbalance equation ($
+\Delta\phi(\lambda) =
+\frac{2\pi n_{\mathrm{eff}}(\lambda)\Delta L}{\lambda}
+$) with the equation above gives  
+<!--$$\Delta L =\left( (\floor \frac{\Delta \phi}{2\pi})*2\pi + \Delta \phi \right)\frac{\lambda}{2\pi n_{\mathrm{eff}}} $$  -->
+
+$$\Delta L =\left(\mathrm{round}\left(\frac{\Delta\phi}{2\pi}\right)2\pi + \Delta\phi_{target} \right)\frac{\lambda}{2\pi n_{\mathrm{eff}}}$$  
+where rounding is used for calculating the closest value that satisfy target FSR with zero phase difference.
+Here, for 50/50 splitting ($\Delta\phi_{target} = \pi/2$) at 1550 nm an arm-length difference of approximately **22.5 $\mu m$** was selected as the initial design value for a target FSR of approximately **25 nm**.
+
+The analytical arm-length difference was then refined using full-device simulations. The final response can differ from the analytical estimate because of:
+
+* Wavelength-dependent effective and group indices
+* Splitter and combiner imbalance
+* Waveguide propagation loss
+* Bend geometry
+* Transition regions
+* Numerical and geometric phase errors
+
+The final arm-length difference was selected by sweeping the arm imbalance and fine-tuning the output splitting ratio at **1550 nm**.
+<!--
 ## 5. Arm-Imbalance Sweep
 
 An unbalanced MZI was created by increasing the length of one arm while keeping the other arm as the reference arm.
@@ -106,7 +172,7 @@ The arm imbalance was swept using:
 * **y-axis:** finesse
 
 These sweeps were used to identify the relationship between arm geometry and the spectral response.
-
+-->
 ## 6. Fine Tuning at 1550 nm
 
 The arm imbalance was fine-tuned to obtain the target splitting ratio at 1550 nm.
