@@ -78,7 +78,7 @@ The balanced structure provides a reference for evaluating:
 | **Output 2 transmission** | 0.9798         |
 | **Total transmission**    | 0.98           |
 
-![Balanced MZI](figures/XY_cross_section_equal.jpg)
+![Balanced MZI](figures/equal_XY_cross_section.jpg)
 
 ## 5. Group-Index and Arm-Length-Difference Design
 
