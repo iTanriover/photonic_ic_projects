@@ -1,0 +1,237 @@
+switchtolayout;
+selectall;
+delete;
+
+## GEOM params
+bg_index = 1.44;
+
+dL = 22.52e-6; # length difference
+num_freq=201;
+
+mz_length = 20e-6; #short arm length
+wg_length = 6.25e-6;
+
+wg_width = 0.45e-6;
+wg_height = 220e-9;
+
+gap = 1.5e-7;
+
+bend_x = 4e-6;
+bend_y = 1.5e-6;
+
+bend_x_l = 12e-6;
+dx = bend_x_l-bend_x;
+short_split = sqrt(bend_x^2+bend_y^2);
+bend_y_l = sqrt((dL/2+short_split+dx)^2-bend_x_l^2);
+
+mzi_length = mz_length-2*(bend_x_l-bend_x);
+
+ 
+## SIM PARAMS
+size_fme=1.5e-6;
+dy = 25e-9;
+dz = 25e-9;
+num_mesh_y =  size_fme / dy;
+num_mesh_z =  size_fme / dz;
+
+in_wg_length = 1e-6;
+
+offset = 1e-7;
+x_span = in_wg_length + 2*bend_x+wg_length;
+x_min = -(bend_x+(in_wg_length+wg_length)/2);
+x_max = x_span+x_min;
+
+## GEOMETRY
+
+#INPUT WAVEGUIDE
+addstructuregroup;
+set("name","in_arm_up");
+set('x',0);
+set('y',0);
+set('z',0);
+
+addrect;
+set('name','straight wg');
+set('x',0);
+set('x span',wg_length);
+set('y',0);
+set('y span',wg_width);
+set('z',0);
+set('z span',wg_height);
+set('material','Si (Silicon) - Palik');
+addtogroup("in_arm_up");
+
+addwaveguide;
+set('name', 'outgoing bend');
+set("base width",wg_width);
+set("base height",wg_height);
+set("base angle",90);
+poles = [-bend_x/2,0;
+          0,0;
+          0,bend_y;
+          bend_x/2,bend_y];
+set("poles",poles);
+set('x',(wg_length+bend_x)/2);
+set('z',0);
+set('material','Si (Silicon) - Palik');
+addtogroup("in_arm_up");
+
+addwaveguide;
+set('name', 'incoming bend');
+set("base width",wg_width);
+set("base height",wg_height);
+set("base angle",90);
+poles = [bend_x/2,0;
+          0,0;
+          0,bend_y;
+          -bend_x/2,bend_y];
+set("poles",poles);
+set('x',-(wg_length+bend_x)/2);
+set('z',0);
+set('material','Si (Silicon) - Palik');
+addtogroup("in_arm_up");
+
+select('in_arm_up'); 
+arm_length = 2*bend_x + wg_length + mz_length;
+copy(arm_length,0,0); set('name','out_arm_up');
+
+select('in_arm_up::straight wg');
+copy;
+set('name','mz_arm');
+set('y',bend_y);
+set('x',wg_length/2+bend_x+mz_length/2);
+set('x span',mz_length);
+addtogroup('::model::Upper_Arm');
+
+addrect;
+set('name','input wg');
+set('x',x_min);
+set('x span',in_wg_length);
+set('y',bend_y);
+set('y span',wg_width);
+set('z',0);
+set('z span',wg_height);
+set('material','Si (Silicon) - Palik');
+addtogroup("in_arm_up");
+
+copy;
+set('name','output wg');
+set('x',-x_min + arm_length);
+set('x span',in_wg_length);
+addtogroup('::model::out_arm_up');
+
+total_span = 4*bend_x+2*wg_length + mz_length + 2*in_wg_length;
+x_shift = wg_length/2+bend_x+mz_length/2;
+
+select('in_arm_up'); addtogroup('Upper_Arm');
+select('out_arm_up'); addtogroup('Upper_Arm');
+
+select('Upper_Arm');
+set('y',(gap+wg_width)/2);
+set('x',-x_shift);
+
+### coupling Waveguide
+copy;
+set('name', 'Lower_Arm');
+set('y',-(gap+wg_width)/2);
+set('first axis','x');
+set('rotation 1',180);
+
+### Apply modifications to Lower Arm
+
+setnamed('Lower_Arm::mz_arm','x span',mzi_length);
+setnamed('Lower_Arm::mz_arm','y',bend_y_l);
+
+poles_in = [-bend_x_l/2,0;
+          0,0;
+          0,bend_y_l;
+          bend_x_l/2,bend_y_l];
+setnamed('Lower_Arm::in_arm_up::outgoing bend','poles',poles_in);
+
+x_prev = getnamed('Lower_Arm::in_arm_up::outgoing bend','x');
+x_cur = x_prev + (bend_x_l-bend_x)/2;     
+setnamed('Lower_Arm::in_arm_up::outgoing bend','x',x_cur);
+
+poles_out = [bend_x_l/2,0;
+          0,0;
+          0,bend_y_l;
+          -bend_x_l/2,bend_y_l];
+setnamed('Lower_Arm::out_arm_up::incoming bend','poles',poles_out);
+x_prev = getnamed('Lower_Arm::out_arm_up::incoming bend','x');
+x_cur = x_prev -(bend_x_l-bend_x)/2;     
+setnamed('Lower_Arm::out_arm_up::incoming bend','x',x_cur);
+   
+### account for shift introduced by structural group 
+shift_up = getnamed('Upper_Arm','y');
+shift_down = getnamed('Lower_Arm','y');
+
+addfdtd;
+set('mesh accuracy',3);
+set('index',bg_index);
+set('x',0);
+set('x span',total_span);
+#set('y',0);
+set('z',0);
+set('y max', (bend_y+wg_width+gap+1e-6));
+set('y min',- (bend_y_l+wg_width+gap+1e-6));
+set('z span', size_fme);
+set('simulation time',3e-12);
+
+### Add source
+addmode;
+set('mode selection','fundamental TE');
+set('name','input field');
+set('x', -bend_x-wg_length/2-x_shift);
+set('y', bend_y+shift_up);
+set('y span', wg_width*3);
+set('z',0);
+set('z span',size_fme);
+set('set wavelength',1);
+set('wavelength start',1450e-9);
+set('wavelength stop',1650e-9);
+
+### Add field monitors
+addpower;
+set('monitor type','2D X-normal');
+set('name','output up');
+set('x', bend_x+wg_length/2+x_shift);
+set('y', bend_y+shift_up);
+set('y span', wg_width*3);
+set('z',0);
+set('z span',size_fme);
+set('override global monitor settings',1);
+set('frequency points',num_freq);
+set('use wavelength spacing',1);
+set('output Ex',0);
+set('output Ey',0);
+set('output Ez',0);
+set('output Hx',0);
+set('output Hy',0);
+set('output Hz',0);
+
+addpower;
+set('monitor type','2D X-normal');
+set('name','output down');
+set('x', bend_x+wg_length/2+x_shift);
+set('y', -bend_y+shift_down);
+set('y span', wg_width*3);
+set('z',0);
+set('z span',size_fme);
+set('override global monitor settings',1);
+set('frequency points',num_freq);
+set('use wavelength spacing',1);
+set('output Ex',0);
+set('output Ey',0);
+set('output Ez',0);
+set('output Hx',0);
+set('output Hy',0);
+set('output Hz',0);
+
+addpower;
+set('monitor type','2D Z-normal');
+set('name','XY Area');
+set('x', 0);
+set('x span', total_span);
+set('y max', (bend_y+wg_width+gap+1e-6));
+set('y min',- (bend_y_l+wg_width+gap+1e-6));
+set('z',0);
