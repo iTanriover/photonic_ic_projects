@@ -21,16 +21,16 @@ The MZI uses two nominally identical splitter/combiner components connected by t
 
 | Parameter                      | Value             |
 | ------------------------------ | ----------------- |
-| **Platform**                   | [Insert platform] |
-| **Waveguide width**            | [Insert value]    |
-| **Waveguide thickness**        | [Insert value]    |
+| **Platform**                   | SI                |
+| **Waveguide width**            | 450 nm            |
+| **Waveguide thickness**        | 220 nm            |
 | **Target wavelength**          | 1550 nm           |
-| **Input splitter**             | [Insert type]     |
-| **Output combiner**            | [Insert type]     |
-| **Balanced-arm length**        | [Insert value]    |
-| **Short-arm length**           | [Insert value]    |
-| **Long-arm length**            | [Insert value]    |
-| **Final arm-length imbalance** | [Insert value]    |
+| **Input splitter**             |directional coupler|
+| **Output combiner**            |directional coupler|
+| **Balanced-arm length**        | 16 $\mu m$        |
+| **Short-arm length**           | 20 $\mu m$        |
+| **Long-arm length**            | 42.5 $\mu m$      |
+| **Final arm-length imbalance** |  22.5 $\mu m$       |
 
 ## 3. Design Principle
 
@@ -71,15 +71,12 @@ The balanced structure provides a reference for evaluating:
 * Common-arm-length effects
 * Splitter and combiner behavior
 * Baseline transmission
-* Finesse without intentional arm imbalance
 
 | Parameter                 | Value          |
 | ------------------------- | -------------- |
-| **Output 1 transmission** | [Insert value] |
-| **Output 2 transmission** | [Insert value] |
-| **Total transmission**    | [Insert value] |
-| **Finesse**               | [Insert value] |
-| **Excess loss**           | [Insert value] |
+| **Output 1 transmission** | 0.00078        |
+| **Output 2 transmission** | 0.9798         |
+| **Total transmission**    | 0.98           |
 
 ## Group-Index and Arm-Length-Difference Design
 
