@@ -1,0 +1,26 @@
+run;
+findmodes;
+
+n_eff1 = getdata("FDE::data::mode1", "neff");
+
+#findmodes;
+#selectmode(1);
+#setanalysis("track selected mode",1);
+#setanalysis("detailed dispersion calculation",1);
+
+#frequencysweep;
+
+selectmode(1);
+setanalysis('start wavelength',1.5e-6);
+setanalysis('stop wavelength',1.6e-6);
+setanalysis('effective index',real(n_eff1));
+setanalysis('number of points',101);
+
+frequencysweep;
+
+neff_sweep = getdata('FDE::data::frequencysweep', 'neff');
+freq_sweep = getdata('FDE::data::frequencysweep', 'f');
+lambda_sweep = c/freq_sweep;
+D=getdata("frequencysweep",'D');
+
+matlabsave('index_calculation');
