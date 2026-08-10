@@ -10,7 +10,7 @@ $$
 
 where $\Delta L$ is the arm-length difference.
 
-The MZIs were designed using the 50/50 [directional coupler](../directional_coupler/) previously designed for beam splitting and guiding. This project investigates how the arm-length imbalance and common arm length affect the spectral response, free spectral range (FSR), finesse, and output power splitting.
+The MZIs were designed using the 50/50 [directional coupler](../directional_coupler/) previously designed for beam splitting and guiding. This project investigates how the arm-length imbalance the spectral response, free spectral range (FSR), and output power splitting.
 
 The target FSR and phase difference were achieved through automated parameter sweeps. The final design was tuned to achieve approximately 50/50 output splitting at 1550 nm.
 
@@ -24,12 +24,11 @@ The target FSR and phase difference were achieved through automated parameter sw
 | Target wavelength     | 1550 nm             |
 | Input splitter        | Directional Coupler |
 | Output combiner       | Directional Coupler |
-| Short-arm length      | [Insert value]      |
-| Long-arm length       | [Insert value]      |
-| Arm-length imbalance  | [Insert value]      |
-| Final splitting ratio | [Insert value]      |
-| FSR                   | [Insert value]      |
-| Finesse               | [Insert value]      |
+| Short-arm length      | 20 $\mu m$          |
+| Long-arm length       | 42.5 $\mu m$        |
+| Arm-length imbalance  | 22.5 $\mu m$        |
+| Final splitting ratio | 50/50               |
+| FSR                   | 23 nm               |
 
 ## Detailed Project Summary
 
@@ -40,14 +39,14 @@ See the full analysis in:
 ## Repository Contents
 
 * `README.md` — short project overview
-* `PROJECT_SUMMARY.md` — detailed design summary
+* `Summary.md` — detailed design summary
 * `figures/` — MZI layouts, field plots, and simulation results
 * `scripts/` — Lumerical and MATLAB scripts
-* `data/` — processed simulation data
-* `layout/` — layout or GDS files, if available
+<!--* `data/` — processed simulation data
+* `layout/` — layout or GDS files, if available-->
 
 ## Tools
 
 * Ansys Lumerical
 * MATLAB
-* KLayout, if used for layout inspection
+<!--* KLayout, if used for layout inspection-->
