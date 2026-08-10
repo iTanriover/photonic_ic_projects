@@ -30,7 +30,7 @@ The MZI uses two nominally identical splitter/combiner components connected by t
 | **Balanced-arm length**        | 16 $\mu m$        |
 | **Short-arm length**           | 20 $\mu m$        |
 | **Long-arm length**            | 42.5 $\mu m$      |
-| **Final arm-length imbalance** |  22.5 $\mu m$       |
+| **Final arm-length imbalance** |  22.5 $\mu m$     |
 
 ## 3. Design Principle
 
@@ -78,7 +78,9 @@ The balanced structure provides a reference for evaluating:
 | **Output 2 transmission** | 0.9798         |
 | **Total transmission**    | 0.98           |
 
-## Group-Index and Arm-Length-Difference Design
+![Balanced MZI](figures/XY_cross_section_equal.jpg)
+
+## 5. Group-Index and Arm-Length-Difference Design
 
 The group index was calculated from the wavelength-dependent effective index of the fundamental TE-like waveguide mode:
 
@@ -121,7 +123,7 @@ Using:
 
 gives:
 
-$\Delta L \approx \frac{(1550\ \mathrm{nm})^2} {(4.33)(25\ \mathrm{nm})} \approx 22.35\ \mu\mathrm{m}$
+$\Delta L \approx \frac{(1550\ \mathrm{nm})^2} {(4.33)(25\ \mathrm{nm})} \approx 22.5\ \mu\mathrm{m}$
 
 Yet, this calculation doesn't include the required phase difference $\Delta \phi$. Combining the phase shift - arm imbalance equation ($
 \Delta\phi(\lambda) =
@@ -131,19 +133,17 @@ $) with the equation above gives
 
 $$\Delta L =\left(\mathrm{round}\left(\frac{\Delta\phi}{2\pi}\right)2\pi + \Delta\phi_{target} \right)\frac{\lambda}{2\pi n_{\mathrm{eff}}}$$  
 where rounding is used for calculating the closest value that satisfy target FSR with zero phase difference.
-Here, for 50/50 splitting ($\Delta\phi_{target} = \pi/2$) at 1550 nm an arm-length difference of approximately **22.5 $\mu m$** was selected as the initial design value for a target FSR of approximately **25 nm**.
+Here, for 50/50 splitting ($\Delta\phi_{target} = \pi/2$) at 1550 nm an arm-length difference of approximately **22.5 $\mu m$** was selected as the initial design value for a target FSR of approximately **25 nm**.  
+![Unbalanced MZI](figures/mzi_layout.jpg)
 
-The analytical arm-length difference was then refined using full-device simulations. The final response can differ from the analytical estimate because of:
+The analytical arm-length difference was then tested using full-device simulations.   
+![Transmission Spectrum of Designed MZI](figures/unequal_mzi_22_5_transmission.jpg)
 
-* Wavelength-dependent effective and group indices
-* Splitter and combiner imbalance
-* Waveguide propagation loss
-* Bend geometry
-* Transition regions
-* Numerical and geometric phase errors
+The FDTD simulation indicate a FSR of $\approx$ 23 nm and $\pi/2$ (target) phase difference at 1549 nm. The final response slighlty differ (2 nm for FSR, and 1 nm from target wavelength) from the analytical estimate. The difference attributed to rounding (we round to a multiples of 100 nm for realistic design) and and bend geometry.  
+![Designed MZI at 1549 nm](figures/XY_cross_section.jpg)
 
-The final arm-length difference was selected by sweeping the arm imbalance and fine-tuning the output splitting ratio at **1550 nm**.
-<!--
+<!-- The final arm-length difference was selected by sweeping the arm imbalance and fine-tuning the output splitting ratio at **1550 nm**.
+
 ## 5. Arm-Imbalance Sweep
 
 An unbalanced MZI was created by increasing the length of one arm while keeping the other arm as the reference arm.
@@ -154,29 +154,28 @@ The arm imbalance was swept using:
 * Smaller step sizes to identify the useful region
 * Fine steps to tune the final splitting ratio at 1550 nm
 
-### Large-Step Sweep
+### Large-Step Sweep -->
 
 <!-- Insert figure here -->
 
-* **x-axis:** arm length or arm-length imbalance
+<!--* **x-axis:** arm length or arm-length imbalance
 * **y-axis:** finesse
 
 ### Small-Step Sweep
 
 <!-- Insert figure here -->
 
-* **x-axis:** arm length or arm-length imbalance
+<!--* **x-axis:** arm length or arm-length imbalance
 * **y-axis:** finesse
 
-These sweeps were used to identify the relationship between arm geometry and the spectral response.
--->
-## 6. Fine Tuning at 1550 nm
+These sweeps were used to identify the relationship between arm geometry and the spectral response.-->
+<!--## 6. Fine Tuning at 1550 nm
 
-The arm imbalance was fine-tuned to obtain the target splitting ratio at 1550 nm.
+The arm imbalance was fine-tuned to obtain the target splitting ratio at 1550 nm.-->
 
 <!-- Insert figure here -->
 
-* **x-axis:** arm length or arm-length imbalance
+<!--* **x-axis:** arm length or arm-length imbalance
 * **y-axis:** splitting ratio at 1550 nm
 
 | Parameter                     | Value          |
@@ -199,11 +198,11 @@ This separates the effects of:
 * Arm-length imbalance
 * Optical phase difference
 * Device footprint
-* Propagation loss
+* Propagation loss-->
 
 <!-- Insert figure here -->
 
-* **x-axis:** constant/common arm length
+<!--* **x-axis:** constant/common arm length
 * **y-axis:** finesse
 
 | Parameter              | Value          |
@@ -216,13 +215,13 @@ The results indicate whether the finesse is primarily controlled by the arm imba
 
 ## 8. Final Broadband Response
 
-The final MZI design was simulated over the selected wavelength range.
+The final MZI design was simulated over the selected wavelength range.-->
 
 <!-- Insert figure here -->
 
-* **x-axis:** wavelength
+<!--* **x-axis:** wavelength
 * **y-axis:** transmission or normalized output power
-* **Curves:** Output 1 and Output 2
+* **Curves:** Output 1 and Output 2 
 
 The final response is summarized below:
 
@@ -240,46 +239,42 @@ The final response is summarized below:
 
 ## 9. Final Field Distribution
 
-The electric-field distribution was examined at the target wavelength to confirm propagation through the splitter, arms, and combiner.
+The electric-field distribution was examined at the target wavelength to confirm propagation through the splitter, arms, and combiner.-->
 
 <!-- Insert figure here -->
 
-* **Wavelength:** 1550 nm
+<!--* **Wavelength:** 1550 nm
 * **Field component:** [Insert component, e.g., $E_y$]
 
-The field plot shows interference between the two arms and the resulting power distribution at the output ports.
+The field plot shows interference between the two arms and the resulting power distribution at the output ports. -->
 
-## 10. Final Design Summary
+## 6. Final Design Summary
 
-| Parameter                 | Value          |
-| ------------------------- | -------------- |
-| **Waveguide width**       | [Insert value] |
-| **Waveguide thickness**   | [Insert value] |
-| **Input splitter type**   | [Insert type]  |
-| **Output combiner type**  | [Insert type]  |
-| **Short-arm length**      | [Insert value] |
-| **Long-arm length**       | [Insert value] |
-| **Arm-length imbalance**  | [Insert value] |
-| **Target wavelength**     | 1550 nm        |
-| **Final splitting ratio** | [Insert value] |
-| **FSR**                   | [Insert value] |
-| **Finesse**               | [Insert value] |
-| **Total transmission**    | [Insert value] |
+| Parameter                      | Value             |
+| ------------------------------ | ----------------- |
+| **Platform**                   | SI                |
+| **Waveguide width**            | 450 nm            |
+| **Waveguide thickness**        | 220 nm            |
+| **Target wavelength**          | 1550 nm           |
+| **Input splitter**             |directional coupler|
+| **Output combiner**            |directional coupler|
+| **Balanced-arm length**        | 16 $\mu m$        |
+| **Short-arm length**           | 20 $\mu m$        |
+| **Long-arm length**            | 42.5 $\mu m$      |
+| **Final arm-length imbalance** |  22.5 $\mu m$     |
+| **Final splitting ratio**      | 50/50             |
+| **FSR**                        |  23 nm            |
+| **Total transmission**         |      0.97         |
 
-## 11. Conclusions
+## 7. Conclusions
 
 A passive MZI was designed and analyzed using balanced and unbalanced arm configurations.
 
-The main conclusions are:
-
 * Balanced arms provide a reference response with no intentional path-length difference.
-* Arm-length imbalance produces wavelength-dependent interference.
-* Coarse-to-fine sweeps provide an efficient method for selecting the final arm imbalance.
-* The common arm length can affect finesse, loss, and device footprint even when the imbalance remains constant.
 * The final design was tuned to achieve approximately 50/50 splitting at 1550 nm.
 * The broadband simulation confirms the wavelength-dependent response of the passive MZI.
 
-## 12. Limitations and Next Steps
+## 8. Limitations and Next Steps
 
 Possible extensions include:
 
