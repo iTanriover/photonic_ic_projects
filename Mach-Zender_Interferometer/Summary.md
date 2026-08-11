@@ -125,10 +125,7 @@ gives:
 
 $\Delta L \approx \frac{(1550\ \mathrm{nm})^2} {(4.33)(25\ \mathrm{nm})} \approx 22.5\ \mu\mathrm{m}$
 
-Yet, this calculation doesn't include the required phase difference $\Delta \phi$. Combining the phase shift - arm imbalance equation ($
-\Delta\phi(\lambda) =
-\frac{2\pi n_{\mathrm{eff}}(\lambda)\Delta L}{\lambda}
-$) with the equation above gives  
+Yet, this calculation doesn't include the required phase difference $\Delta \phi$. Combining the phase shift - arm imbalance equation ($\Delta\phi(\lambda) = \frac{2\pi n_{\mathrm{eff}}(\lambda)\Delta L}{\lambda}$) with the equation above gives  
 <!--$$\Delta L =\left( (\floor \frac{\Delta \phi}{2\pi})*2\pi + \Delta \phi \right)\frac{\lambda}{2\pi n_{\mathrm{eff}}} $$  -->
 
 $$\Delta L =\left(\mathrm{round}\left(\frac{\Delta\phi}{2\pi}\right)2\pi + \Delta\phi_{target} \right)\frac{\lambda}{2\pi n_{\mathrm{eff}}}$$  
