@@ -1,5 +1,5 @@
 Photonic Integrated Circuit Design Projects
-This repository contains sample photonic-device designs and simulations developed using Lumerical FDE/FDTD, MATLAB, and related photonic-design tools.
+This repository contains sample photonic-device designs and simulations developed using Ansys Lumerical MODE(FDE, EME)/FDTD, MATLAB, and related photonic-design tools.
 # Projects
 ## Directional Coupler
 Design and analysis of a silicon-photonic directional coupler near 1550 nm, including:
