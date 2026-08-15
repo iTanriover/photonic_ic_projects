@@ -61,17 +61,15 @@ A mode-convergence sweep was performed to determine the number of modes required
 
 A mode count of 50 was selected as a safe value for the subsequent simulations.
 
-| Parameter | Value |
-|---|---|
-| **Number of modes tested** | [Insert range] |
-| **Selected mode count** | 50 |
-| **Convergence metric** | [Insert metric] |
+![Mode Convergence Sweep](figures/mode_convergence.jpg)
 
 ## 5. MMI-Width Sweep
 
 The MMI width was swept to determine its effect on the output transmission and splitting behavior.
 
 The initial MMI width was 10 µm. The sweep identified an optimized width of approximately 4.5 µm.
+
+![MMI Core Width Sweep](figures/width_sweeep1.jpg)
 
 The width sweep showed that the MMI width strongly affects:
 
@@ -85,14 +83,16 @@ The width sweep showed that the MMI width strongly affects:
 |---|---|
 | **Initial MMI width** | 10 µm |
 | **Optimized MMI width** | 4.5 µm |
-| **Width sweep range** | [Insert range] |
-| **Width sweep step** | [Insert step] |
+| **Width sweep range** | 2-12 µm |
+| **Width sweep step** | variable 1µm - 0.5µm |
 
 ## 6. Coarse MMI-Length Sweep
 
 The MMI length was initially swept from 5 µm to 200 µm using a 1 µm step.
 
 This sweep was used to identify the approximate length range corresponding to high transmission and balanced output power.
+
+![MMI Length Sweep](figures/length_sweeep.jpg)
 
 The coarse sweep indicated an optimum near 18 µm.
 
@@ -105,6 +105,8 @@ The coarse sweep indicated an optimum near 18 µm.
 ## 7. Fine MMI-Length Sweep
 
 A second, finer sweep was performed from 17 µm to 19 µm using a 0.1 µm step.
+
+![MMI Length Sweep](figures/length_sweeep_fine.jpg)
 
 The refined sweep identified an optimized MMI length of approximately 17.5 µm.
 
@@ -119,6 +121,8 @@ The fine sweep provided a more accurate estimate than the initial coarse sweep.
 ## 8. Wavelength Sweep
 
 The transmission was evaluated over the wavelength range from 1500 nm to 1600 nm using a 2 nm wavelength step.
+
+![Wavelength Sweep](figures/wavelength_swp.jpg)
 
 The optimized structure showed its best response near 1548 nm, which is sufficiently close to the target wavelength of 1550 nm for the initial design.
 
@@ -140,15 +144,18 @@ The small offset from 1550 nm may result from:
 ## 9. Taper-Width Sweep
 
 The taper width was swept to evaluate the effect of the input and output transitions on device transmission and splitting.
+![Taper Width Sweep](figures/Taper_width_swp.jpg)
 
 An optimized taper width of approximately 1.75 µm was obtained.
 
 | Parameter | Value |
 |---|---|
 | **Optimized taper width** | 1.75 µm |
-| **Taper length** | [Insert value] |
+| **Taper length** | 10  µm|
 | **Taper type** | Linear |
-| **Taper sweep range** | [Insert range] |
+| **Taper sweep range** | 0.45-2.25  µm |
+
+![Taper Width vs Loss](figures/loss_dB.jpg)
 
 The taper influences mode conversion between the single-mode access waveguides and the multimode interference region. An inappropriate taper can introduce mode mismatch, reflection, and excess loss.
 
@@ -164,7 +171,6 @@ The final design combines the optimized MMI width, MMI length, and taper width.
 | **Waveguide width** | 450 nm |
 | **Silicon thickness** | 220 nm |
 | **Target wavelength** | 1550 nm |
-| **Simulated optimum wavelength** | Approximately 1548 nm |
 
 The final transmission plot should include:
 
