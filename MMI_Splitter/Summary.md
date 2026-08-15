@@ -61,7 +61,7 @@ A mode-convergence sweep was performed to determine the number of modes required
 
 A mode count of 50 was selected as a safe value for the subsequent simulations.
 
-![Mode Convergence Sweep](figures/mode_convergence.jpg)
+![Mode Convergence Sweep](figures/mode_convergence_swp.jpg)
 
 ## 5. MMI-Width Sweep
 
@@ -69,7 +69,7 @@ The MMI width was swept to determine its effect on the output transmission and s
 
 The initial MMI width was 10 µm. The sweep identified an optimized width of approximately 4.5 µm.
 
-![MMI Core Width Sweep](figures/width_sweeep1.jpg)
+![MMI Core Width Sweep](figures/width_sweep1.jpg)
 
 The width sweep showed that the MMI width strongly affects:
 
@@ -92,7 +92,7 @@ The MMI length was initially swept from 5 µm to 200 µm using a 1 µm step.
 
 This sweep was used to identify the approximate length range corresponding to high transmission and balanced output power.
 
-![MMI Length Sweep](figures/length_sweeep.jpg)
+![MMI Length Sweep](figures/length_sweep.jpg)
 
 The coarse sweep indicated an optimum near 18 µm.
 
@@ -106,7 +106,7 @@ The coarse sweep indicated an optimum near 18 µm.
 
 A second, finer sweep was performed from 17 µm to 19 µm using a 0.1 µm step.
 
-![MMI Length Sweep](figures/length_sweeep_fine.jpg)
+![MMI Length Sweep](figures/length_sweep_fine.jpg)
 
 The refined sweep identified an optimized MMI length of approximately 17.5 µm.
 
@@ -144,7 +144,7 @@ The small offset from 1550 nm may result from:
 ## 9. Taper-Width Sweep
 
 The taper width was swept to evaluate the effect of the input and output transitions on device transmission and splitting.
-![Taper Width Sweep](figures/Taper_width_swp.jpg)
+![Taper Width Sweep](figures/Taper_width_sweep.jpg)
 
 An optimized taper width of approximately 1.75 µm was obtained.
 
@@ -172,26 +172,19 @@ The final design combines the optimized MMI width, MMI length, and taper width.
 | **Silicon thickness** | 220 nm |
 | **Target wavelength** | 1550 nm |
 
-The final transmission plot should include:
-
-- Output-port transmission
-- Total transmitted power
-- Splitting ratio, if available
-- Loss or excess-loss metric
-
 | Metric | Value |
 |---|---|
-| **Output 1 transmission** | [Insert value] |
-| **Output 2 transmission** | [Insert value] |
-| **Total transmission** | [Insert value] |
-| **Output imbalance** | [Insert value] |
-| **Loss metric** | [Insert value] |
-
-The best reported transmission/loss metric reached approximately -27 dB. The exact interpretation should be specified as either insertion loss, excess loss, reflection, or another transmission quantity.
+| **Output 1 transmission** | 0.497204 |
+| **Output 2 transmission** | 0.49811  |
+| **Total transmission** | 0.995315 |
+| **Output imbalance** | 0.0079 dB |
+| **Loss** | -23.3 dB |
 
 ## 11. Final Field Distribution
 
 The electric-field distribution was examined using an XY cross section of the final device at the target wavelength.
+
+![E Field at XY Cross Section at 1550](figures/final_design_XY.jpg)
 
 The field plot illustrates:
 
@@ -199,12 +192,6 @@ The field plot illustrates:
 - Multimode interference inside the central region
 - Field redistribution toward the two output waveguides
 - Output-port power separation
-
-| Parameter | Value |
-|---|---|
-| **Field component** | [Insert component, e.g., $E_y$] |
-| **Plot quantity** | [Insert quantity] |
-| **Wavelength** | 1550 nm |
 
 ## 12. S-Parameter Extraction
 
@@ -267,7 +254,7 @@ The INTERCONNECT model will be compared against the original FDTD transmission d
 | **Target wavelength** | 1550 nm |
 | **Simulated optimum wavelength** | Approximately 1548 nm |
 | **Selected FDE mode count** | 50 |
-| **Best reported loss/transmission metric** | Approximately -27 dB |
+| **Total Loss** |  -23.3 dB |
 | **S-parameter extraction** | [Status] |
 | **INTERCONNECT N-port model** | [Status] |
 
