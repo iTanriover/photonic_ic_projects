@@ -48,7 +48,7 @@ The extracted model will enable:
 
 ## Detailed Project Summary
 
-[View the detailed project summary](MMI_splitter/Summary.md)
+[View the detailed project summary](Summary.md)
 
 ## Repository Contents
 
