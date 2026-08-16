@@ -22,3 +22,17 @@ Arm-length-difference design for a target free spectral range
 Broadband transmission analysis.  
 
 See [Summary.md](Mach-Zender_Interferometer/Summary.md).
+
+## Multi Mode Interferometer
+Design and analysis of a silicon-photonic 1x2 Multi Mode Interferometer (MMI) at 1550 nm, including:
+
+EME mode-convergence analysis
+MMI-width optimization
+MMI-length optimization
+Fine MMI-length sweep
+Wavelength-dependent transmission analysis
+Taper-width optimization
+Final electric-field visualization
+S-parameter extraction
+
+See [Summary.md](MMI_Splitter/Summary.md).
