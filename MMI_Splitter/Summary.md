@@ -211,7 +211,9 @@ $$
 
 where $S_{ij}$ describes the complex wave response at port $i$ due to excitation at port $j$.
 
-The S-parameter workflow is:
+After optimizing the MMI, open the corresponding .lms file. Then, run "write_s_params_to_text.lsf". Number of frequency points and target .txt file name can be changed directly from the script.
+
+<!--The S-parameter workflow is:
 
 1. Define the input and output ports.
 2. Sweep the operation wavelength along the spectral band of interest.
@@ -234,8 +236,8 @@ Potential applications include:
 - Larger silicon-photonic circuit simulations
 
 The INTERCONNECT model was compared against the original EME transmission data to verify that the exported S-parameters preserve the component response.
-
-## 14. Conclusions
+-->
+## 13. Conclusions
 
 A passive silicon-photonic 1×2 MMI splitter was designed using EME simulations.
 
