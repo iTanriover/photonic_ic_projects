@@ -1,0 +1,125 @@
+clear;
+
+N_wavelength = 21; # number of freq point for wavelength sweep
+wl_start = 1.5e-6; # start wavelength
+wl_stop = 1.6e-6; #stop wavelength
+center_wl = 1.55e-6; # for group delay calculations
+fc=c/center_wl;
+
+N_index_1 = 3; # number of ports
+N_index_2 = 3; # number of ports
+
+name = 'my_MMI';
+# port definitions for S-parameter files
+ports = cell(3);
+locations = cell(3);
+ports{1} = "opt_1";
+ports{2} = "opt_2";
+ports{3} = "opt_3";
+locations{1} = "LEFT";
+locations{2} = "RIGHT";
+locations{3} = "RIGHT";
+
+txtfilename = 'mmi_1x2_S_params.txt';
+if(fileexists(txtfilename)) { rm(txtfilename); }
+
+## Running simulations for TE and TM polarizations 
+#TE
+switchtolayout;
+
+setnamed("EME","z min bc", "Symmetric"); #forces TE mode to be selected
+setnamed("EME","wavelength",center_wl);
+save(name+"_TE.lms");
+
+run;
+
+setemeanalysis("calculate group delays",1);
+emepropagate;
+groupdelay_TE = getresult("EME","user group delay");
+
+wavelength_sweep;
+s_matrix_TE = s_matrix;
+matlabsave('s_matrix_te');
+
+#TM
+switchtolayout;
+setnamed("EME","z min bc", "Anti-Symmetric"); #forces TM mode to be selected
+save(name+"_TM.lms");
+setnamed("EME","wavelength",center_wl);
+run;
+setemeanalysis("calculate group delays",1);
+emepropagate;
+groupdelay_TM = getresult("EME","user group delay");
+wavelength_sweep;
+s_matrix_TM = s_matrix;
+matlabsave('s_matrix_tm');
+
+# define mode number/ID
+for (mode_ID_num = 1:2){
+    if (mode_ID_num==1){
+        s_matrix = s_matrix_TE;
+        GD = groupdelay_TE;
+        mode_ID = "TE";
+        P="TE_Phase";
+    }else{
+        s_matrix = s_matrix_TM;
+        GD = groupdelay_TM;
+        mode_ID = "TM";
+         P="TM_Phase";
+    }
+    # extract s-parameters
+
+    spar = getattribute(s_matrix,"user s matrix");
+    wl = getparameter(s_matrix,"wavelength");
+    wl=flip(wl,1);f=c/wl;
+    
+    
+    S11=pinch(spar(1,1,1:length(wl)));
+    S12=pinch(spar(1,2,1:length(wl)));
+    S13=pinch(spar(1,3,1:length(wl)));
+    
+    S21=pinch(spar(2,1,1:length(wl)));
+    S22=pinch(spar(2,2,1:length(wl)));
+    S23=pinch(spar(2,3,1:length(wl)));
+    
+    S31=pinch(spar(3,1,1:length(wl)));
+    S32=pinch(spar(3,2,1:length(wl)));
+    S33=pinch(spar(3,3,1:length(wl)));
+    
+    S11=flip(S11,1);S12=flip(S12,1);S13=flip(S13,1);
+    S21=flip(S21,1);S22=flip(S22,1);S23=flip(S23,1);
+    S31=flip(S31,1);S32=flip(S32,1);S33=flip(S33,1);
+    
+    # write s-parameter file
+    ? "Writing " + name + ": "+mode_ID;
+    format short;
+    if (mode_ID_num==1){
+        for (i=1:3) {
+            write(txtfilename,'["'+ports{i}+'","'+locations{i}+'"]');
+        }
+    }
+    for (i=1:3) {
+        for (j=1:3) {
+            text='("';
+            text=text + ports{i} + '","' + mode_ID + '",'+ num2str(mode_ID_num)+',';
+            text=text + '"';
+            text=text + ports{j} + '",' + num2str(mode_ID_num)+ ',"transmission",';
+            text=text + num2str(GD(i,j))+')';
+            write(txtfilename,text);
+            matrix_size="("+num2str(length(wl))+",3)";
+            write(txtfilename,matrix_size);
+            name_s = "S"+num2str(i)+num2str(j);
+            #temp = "temp=[f, abs(" + name_s + "),unwrap(angle(" + name_s + "))];";
+            temp = "temp=[f, abs(" + name_s + "),unwrap(angle(" + name_s + "))-2*pi*GD(i,j)*(f-fc)];";
+            eval(temp);
+            format long;
+            write(txtfilename,num2str(temp));
+            format short;
+        }
+    }
+    
+}
+    
+
+
+

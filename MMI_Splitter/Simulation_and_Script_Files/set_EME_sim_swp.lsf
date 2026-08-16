@@ -1,0 +1,145 @@
+switchtolayout;
+selectall;
+delete;
+
+mmi_length = 17.5e-6;
+mmi_width = 4.5e-6; # comment out based on type of swp
+
+bg_index = 1.44;
+wg_width = 0.45e-6;
+wg_height = 220e-9;
+taper_length = 10e-6;
+#taper_width = 1e-6; # comment out based on type of swp
+
+sim_z_span = 3e-6; # z span of simulation region
+
+group_spans    = [taper_length;mmi_length;taper_length];   
+cells          = [20;1;20];
+subcell_method = [1;0;1];      # 1 = CVCS (Center Vertex Cross Section), 0 = None
+
+### Add MMI 
+addrect;
+set('x',0);
+set('x span',mmi_length);
+set('y',0);
+set('y span',mmi_width);
+set('z',0);
+set('z span',wg_height);
+set('name','MMI_wg');
+set('material','Si (Silicon) - Palik');
+addtogroup('MMI');
+# calculate x, y corner positions for tapers
+x1 = taper_length/2; x0 = -x1; 
+y0 = wg_width/2; y1 = taper_width/2;
+y2 = -y1; y3 = -y0;
+
+# input taper
+addpoly;
+set('name','input taper');
+set('material','Si (Silicon) - Palik');
+set('x',-(mmi_length+taper_length)/2);
+set('y',0);
+set('z',0);
+set('z span',wg_height);
+x = [x0;x1;x1;x0];
+y = [y0;y1;y2;y3];
+V=[x,y];
+set("vertices",V);
+addtogroup('MMI');
+
+# Output tapers
+addpoly;
+set('name','output taper1');
+set('material','Si (Silicon) - Palik');
+set('x',(mmi_length + taper_length)/2);
+set('y',mmi_width/4);
+set('z',0);
+set('z span',wg_height);
+x = [x0;x1;x1;x0];
+y = [y1;y0;y3;y2];
+V=[x,y];
+set("vertices",V);
+
+select('output taper1');
+copy(0,-mmi_width/2,0);
+set('name','output taper2');
+addtogroup('MMI');
+select('output taper1');
+addtogroup('MMI');
+
+select('MMI');
+set('x',0); set('y',0); set('z',0);
+
+###############
+#Add EME
+addeme;
+select('EME');
+set('index',bg_index);
+set('wavelength',1.55e-6);
+set('z min bc','Symmetric'); # Symmetric BC decrease sim cost
+set('x',0);
+set('x min',- mmi_length/2 - taper_length);
+set('y',0);
+set('y span',mmi_width+2e-6);
+set('z',0);
+set('z span', sim_z_span);
+
+set('number of cell groups',3);
+set("cells",cells);
+set("group spans",group_spans);
+#set("modes",modes);
+set("subcell method",subcell_method);
+set('allow custom eigensolver settings',1);
+set('modes',[10;50;10]);
+
+set('define y mesh by',2);
+set('define z mesh by',2);
+set('mesh cells y',100);
+set('mesh cells z',100);
+
+addemeport;
+select('EME::Ports::port_3');
+set('port location', 'right');
+set('y', -mmi_width/4);
+set('y span', wg_width*3);
+set('use full simulation span',0);
+
+select('EME::Ports::port_2');
+set('y', mmi_width/4);
+set('y span', wg_width*3);
+set('use full simulation span',0);
+
+addmesh;
+set('override x mesh',0);
+set('dy',20e-9);
+set('dz',20e-9);
+set('x span',taper_length);
+set('y span',taper_width);
+set('z span',wg_height);
+set('z',0);
+set('x',-(mmi_length+taper_length)/2);
+set('y',0);
+set('name','input mesh');
+
+copy;
+set('name','output taper1');
+set('z',0);
+set('x',(mmi_length+taper_length)/2);
+set('y',mmi_width/4);
+
+copy;
+set('name','output taper2');
+set('z',0);
+set('x',(mmi_length+taper_length)/2);
+set('y',-mmi_width/4);
+
+### Add field monitor
+
+addemeprofile;
+set('monitor type','2D Z-normal');
+set('name','XY Area');
+set('x', 0);
+set('x span', 2*taper_length+mmi_length);
+set('y', 0);
+set('y span', 2*mmi_width + 2e-6);
+set('z',0);

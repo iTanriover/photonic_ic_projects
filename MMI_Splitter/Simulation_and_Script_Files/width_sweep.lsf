@@ -1,0 +1,19 @@
+width_vec = [2:4;4.5:0.5:7;8:12]*1e-6;
+
+T = matrix(length(width_vec));
+
+for(i=1:length(width_vec)){
+switchtolayout;
+
+mmi_width = width_vec(i);
+
+set_EME_sim_swp;
+
+run;    
+emepropagate;
+
+s_matrix = getresult('EME','user s matrix');
+T(i) = abs(s_matrix(2,1))^2;
+    }
+    
+matlabsave('MMI_width_swp');

@@ -1,0 +1,21 @@
+width_vec = [1300:50:2250]*1e-9; #[450:50:1250]*1e-9;
+
+T = matrix(length(width_vec));
+T2 = matrix(length(width_vec));
+
+for(i=1:length(width_vec)){
+switchtolayout;
+
+taper_width = width_vec(i);
+
+set_EME_sim_swp;
+
+run;    
+emepropagate;
+
+s_matrix = getresult('EME','user s matrix');
+T(i) = abs(s_matrix(2,1))^2;
+T2(i) = abs(s_matrix(3,1))^2;
+    }
+    
+matlabsave('MMI_taper_width_swp2');
