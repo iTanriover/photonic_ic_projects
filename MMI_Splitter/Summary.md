@@ -197,13 +197,11 @@ The field plot illustrates:
 
 The final MMI was used to extract wavelength-dependent port responses. The simulated transmission data were exported to text files for conversion into an N-port S-parameter model.
 
-For a 1×2 passive component, the model may include:
+For a 1×2 passive component, the model includes:
 
 - One input port
 - Two output ports
-- Reflection coefficients
-- Forward transmission coefficients
-- Optional reverse-direction terms
+- S-Matrix
 
 The extracted data are organized as wavelength-dependent complex scattering parameters:
 
@@ -216,12 +214,12 @@ where $S_{ij}$ describes the complex wave response at port $i$ due to excitation
 The S-parameter workflow is:
 
 1. Define the input and output ports.
-2. Perform broadband FDTD simulations.
-3. Record complex transmission and reflection data.
+2. Sweep the operation wavelength along the spectral band of interest.
+3. Record S-matrix data.
 4. Export the data to text files.
 5. Convert the data into the required INTERCONNECT N-port format.
 6. Import the model into INTERCONNECT.
-7. Verify the N-port response against the original FDTD results.
+7. Verify the N-port response.
 
 ## 13. INTERCONNECT Model
 
@@ -235,32 +233,11 @@ Potential applications include:
 - Optical routing circuits
 - Larger silicon-photonic circuit simulations
 
-The INTERCONNECT model will be compared against the original FDTD transmission data to verify that the exported S-parameters preserve the component response.
+The INTERCONNECT model was compared against the original EME transmission data to verify that the exported S-parameters preserve the component response.
 
-| Item | Status |
-|---|---|
-| **S-parameter text export** | [Complete/In progress] |
-| **N-port conversion** | [Complete/In progress] |
-| **INTERCONNECT import** | [Complete/In progress] |
-| **FDTD-to-INTERCONNECT comparison** | [Complete/In progress] |
+## 14. Conclusions
 
-## 14. Final Results
-
-| Parameter | Value |
-|---|---|
-| **MMI width** | 4.5 µm |
-| **MMI length** | 17.5 µm |
-| **Taper width** | 1.75 µm |
-| **Target wavelength** | 1550 nm |
-| **Simulated optimum wavelength** | Approximately 1548 nm |
-| **Selected FDE mode count** | 50 |
-| **Total Loss** |  -23.3 dB |
-| **S-parameter extraction** | [Status] |
-| **INTERCONNECT N-port model** | [Status] |
-
-## 15. Conclusions
-
-A passive silicon-photonic 1×2 MMI splitter was designed using a combination of FDE and FDTD simulations.
+A passive silicon-photonic 1×2 MMI splitter was designed using EME simulations.
 
 The design process included:
 
@@ -272,30 +249,4 @@ The design process included:
 - Final field-distribution analysis
 - S-parameter extraction for circuit-level modeling
 
-The final design uses an MMI width of approximately 4.5 µm, an MMI length of approximately 17.5 µm, and a taper width of approximately 1.75 µm. Its optimum response occurs near 1548 nm, close to the 1550 nm design target.
-
-The next stage is to complete the N-port S-parameter conversion and validate the resulting component model in INTERCONNECT.
-
-## 16. Repository Structure
-
-```text
-├── README.md
-├── PROJECT_SUMMARY.md
-├── figures/
-│   ├── initial_mmi_geometry.png
-│   ├── mode_convergence.png
-│   ├── mmi_width_sweep.png
-│   ├── mmi_length_sweep_coarse.png
-│   ├── mmi_length_sweep_fine.png
-│   ├── mmi_wavelength_sweep.png
-│   ├── taper_width_sweep.png
-│   ├── final_mmi_transmission.png
-│   ├── final_mmi_field.png
-│   └── s_parameter_workflow.png
-├── scripts/
-│   ├── lumerical/
-│   └── matlab/
-├── data/
-├── s_parameters/
-├── interconnect/
-└── layout/
+The final design uses an MMI width of 4.5 µm, an MMI length of approximately 17.5 µm, and a taper width of 1.75 µm, achieving a total loss of -23.3 dB and output imbalance of 0.0079 dB. 
