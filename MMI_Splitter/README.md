@@ -29,15 +29,14 @@ The device uses a tapered single-mode input waveguide, a multimode interference 
 - Taper-width optimization
 - Final electric-field visualization
 - S-parameter extraction
-- Preparation of an N-port S-parameter model for INTERCONNECT
 
 ## Main Result
 
-The optimized design uses an MMI width of approximately 4.5 µm and an MMI length of approximately 17.5 µm.
+The optimized design uses an MMI width of 4.5 µm and an MMI length of 17.5 µm.
 
 ## S-Parameter Model
 
-The simulated port responses are being exported to text file and converted into an N-port S-parameter object for circuit-level simulation in INTERCONNECT.
+The simulated port responses were exported to text file and can be converted into an N-port S-parameter object for circuit-level simulation in INTERCONNECT.
 
 The extracted model will enable:
 
@@ -55,14 +54,10 @@ The extracted model will enable:
 - `README.md` — short project overview
 - `Summary.md` — detailed design methodology and results
 - `figures/` — sweep results, transmission plots, and field distributions
-- `scripts/` — Lumerical scripts
-- `s_parameter.txt` — exported S-parameter text file
-- `interconnect/` — INTERCONNECT files and N-port model, if available
+- `Simulation_and_Script_Files/` — Lumerical simulation and scripts  files
+- `mmi_1x2_S_params.txt` — exported S-parameter text file
 
 ## Tools
 
 - Ansys Lumerical MODE
-- Ansys INTERCONNECT
 - MATLAB
-- MATLAB
-- KLayout, if used for layout inspection
