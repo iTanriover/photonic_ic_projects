@@ -12,7 +12,6 @@ The design targets a resonance wavelength of 1550 nm and a free spectral range (
 * Resonance-wavelength and FSR analysis
 * Quality-factor extraction
 * Coupling-length sweep
-* Radius sweep
 * Field-distribution analysis near resonance
 
 ## Design Targets
@@ -25,7 +24,7 @@ The design targets a resonance wavelength of 1550 nm and a free spectral range (
 | **Nominal gap**       | 150 nm                 |
 | **Target wavelength** | 1550 nm                |
 | **Target FSR**        | 20 nm                  |
-| **Target loaded Q**   | Approximately 2000     |
+| **Target loaded Q**   | Approximately 1500     |
 | **Simulation tools**  | Lumerical varFDTD/FDTD |
 
 ## Main Results
@@ -38,7 +37,7 @@ Q = \frac{\lambda_{\mathrm{res}}}{\Delta\lambda_{\mathrm{FWHM}}}
 
 The measured FSR was approximately 21 nm. The small difference from the target values is attributed mainly to geometric rounding and numerical resolution.
 
-![Resonator transmission](figures/resonator_transmission.jpg)
+![Resonator transmission](figures/final_resonator_transmission.jpg)
 
 ![Near-resonance field distribution](figures/resonator_field_map.jpg)
 
@@ -55,7 +54,7 @@ A coupling-length sweep and radius sweep were used to move the final response to
 
 * **Resonance wavelength:** approximately 1550 nm
 * **FSR:** approximately 20 nm
-* **Loaded Q:** approximately 2000
+* **Loaded Q:** approximately 1500
 
 ## Design Tolerance Targets
 
@@ -77,11 +76,9 @@ These values are simulation/design tolerances rather than measured fabrication t
 ## Repository Contents
 
 * `README.md` — short project overview
-* `PROJECT_SUMMARY.md` — detailed design methodology and results
+* `Summary.md` — detailed design methodology and results
 * `figures/` — transmission plots and field maps
-* `scripts/` — Lumerical and MATLAB scripts
-* `data/` — processed simulation data
-* `layout/` — layout and GDS files, if available
+* `simulation_and_script_files/` — Lumerical simulation and script files
 
 ## Tools
 
