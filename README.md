@@ -36,3 +36,13 @@ Final electric-field visualization
 S-parameter extraction  
 
 See [Summary.md](MMI_Splitter/Summary.md).
+
+## Micro Ring Interferometer
+Design and analysis of a silicon-photonic Micro Ring Resonator (MMR) at 1550 nm, including:
+
+Group-index-based resonator initial design  
+Ring and racetrack resonator simulations in varFDTD and FDTD 
+Coupling-length analysis  
+Resonance-wavelength, FSR, and Quality-factor targeted final design  
+
+See [Summary.md](Ring_Resonator/Summary.md).
