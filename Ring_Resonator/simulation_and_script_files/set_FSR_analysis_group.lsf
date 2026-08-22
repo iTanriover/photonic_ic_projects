@@ -1,0 +1,41 @@
+addanalysisgroup;
+set('name','FSR');
+select('drop');
+addtogroup('FSR');
+select('FSR');
+addanalysisresult('FSR');
+addanalysisresult('peaks');
+addanalysisresult('delta_wl');
+addanalysisresult('Q');
+addanalysisprop('tol',0,0.25);
+addanalysisprop('max_peaks',0,25);
+addanalysisprop('target_wl',2,1550e-9);
+
+analysis_script = "
+T = getresult('drop','T');
+lambda = c/T.f;
+T = abs(T.T);
+
+pos = findpeaks(T,max_peaks);
+num_peaks = sum(T(pos) > tol); # the number of peaks above tolerance
+pos = findpeaks(T,num_peaks);
+lambda_peaks = lambda(pos);
+
+peak1 = find(lambda_peaks,max(lambda_peaks));
+peak2 = find(lambda_peaks,min(lambda_peaks));
+
+peaks = matrix(num_peaks,2);
+peaks(:,1) = lambda_peaks;
+peaks(:,2) = T(num_peaks);
+
+res_ind = find(lambda_peaks,target_wl);
+lambda_c = lambda_peaks(res_ind);
+res_ind = find(lambda,lambda_c);
+
+Q = lambda(res_ind)/abs(lambda(res_ind+1)-lambda(res_ind-1));
+
+delta_wl =  min(abs(lambda_peaks-target_wl));
+FSR = (lambda_peaks(peak1)-lambda_peaks(peak2))/(num_peaks-1);";
+
+set("analysis script", analysis_script);
+

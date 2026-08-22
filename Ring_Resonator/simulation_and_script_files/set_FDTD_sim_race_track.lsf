@@ -1,0 +1,102 @@
+switchtolayout;
+selectall;
+delete;
+
+## GEOM params
+bg_index = 1.44;
+
+wg_length = 2e-6;
+
+wg_width = 0.45e-6;
+wg_height = 220e-9;
+
+gap = 1.5e-7;
+
+Lc = 1e-6;#6.4e-6; # coupling length
+
+radius = 4.1e-6; #4.1e-6; # resonator radius 
+
+x_span = 30e-6;# xspan for resonator object group
+
+offset =1e-6;
+
+# Sim Region Parameters
+sim_x_span = x_span-15e-6;
+sim_y_span = 2*(2*wg_width+gap+radius)+2e-6;
+sim_z_span = 4e-6;
+
+## Set up simulation
+addobject('ring_resonator');
+set('x',-x_span/2); set('y',0); set('z',0);
+set('x span',x_span);
+set('base width',wg_width);
+set('base height',wg_height);
+set('Lc',Lc);
+set('gap',gap);
+set('radius', radius);
+
+
+addfdtd;
+set('x',0); set('y',0); set('z',0);
+set('x span',sim_x_span);
+set('y span',sim_y_span);
+set('z span',sim_z_span);
+set('index',bg_index);
+set('mesh accuracy',3);
+set('z min bc','Symmetric');
+
+set('simulation time',40e-12);
+set('dt stability factor',0.9);
+
+addmode;
+set('mode selection','fundamental TE');
+set('name','input field');
+set('x', -sim_x_span/2 + offset);
+set('y', radius+gap+wg_width);
+set('y span', wg_width*3);
+set('z',0);
+set('z span',sim_z_span);
+set('set wavelength',1);
+set('wavelength start',1500e-9);
+set('wavelength stop',1600e-9);
+
+
+addpower;
+set('monitor type','2D X-normal');
+set('name','through');
+set('x', sim_x_span/2 - offset);
+set('y', (radius+gap+wg_width));
+set('y span', wg_width*3);
+set('z',0);
+set('z span',sim_z_span);
+set('override global monitor settings',1);
+set('frequency points',251);
+set('use wavelength spacing',1);
+set('sample spacing','Chebyshev');
+set('output Ex',0);set('output Ey',0);set('output Ez',0);
+set('output Hx',0);set('output Hy',0);set('output Hz',0);
+
+copy;
+#set('monitor type','2D X-normal');
+set('name','drop');
+set('x', -sim_x_span/2 + offset);
+set('y', -(radius+gap+wg_width));
+#set('y span', wg_width*3);
+#set('z',0);
+#set('z span',sim_z_span);
+#set('override global monitor settings',1);
+#set('frequency points',251);
+#set('use wavelength spacing',1);
+#set('sample spacing','Chebyshev');
+
+addpower;
+set('monitor type','2D Z-normal');
+set('name','XY Area');
+set('x', 0);
+set('x span', x_span);
+set('y', 0);
+set('y span', sim_y_span);
+set('z',0);
+set('override global monitor settings',1);
+set('frequency points',21);
+set('use wavelength spacing',1);

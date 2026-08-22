@@ -1,0 +1,47 @@
+# Ibrahim Tanriover
+gap = 150e-9;
+wg_width = 450e-9;
+
+radius_vals = [4.45:0.05:4.75]*1e-6; 
+
+N = length(radius_vals); 
+
+FSRs = matrix(N);
+d_wl = matrix(N);
+Q = matrix(N);
+Ts = matrix(N,401);
+#lambdas = matrix(N,401);
+for(i=1:N){
+    
+    switchtolayout;
+    #Lc = Lc_vals(i);
+    radius = radius_vals(i);
+    # Sim Region Parameters
+    sim_y_span = 2*(2*wg_width+gap+radius)+2e-6;
+    sim_z_span = 4e-6;
+    y0 = radius+gap+wg_width;
+    select('varFDTD');
+    set('y0', y0);
+    setnamed('ring resonator','radius',radius);
+    setnamed('input field','y',y0);
+    setnamed('through','y',y0);
+    setnamed('FSR::drop','y',-y0);
+
+    #setnamed('ring resonator','Lc',Lc);
+
+    run;
+    ?i;
+    select('FSR');
+    runanalysis;
+
+    FSRs(i) = getresult('FSR','FSR');
+    d_wl(i) = getresult('FSR','delta_wl');
+    Q(i) = getresult('FSR','Q');
+    
+    tt = getresult('through','T');
+    Ts(i,:) = tt.T; 
+
+    }
+
+matlabsave('Radius_swp');
+
