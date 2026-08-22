@@ -1,0 +1,30 @@
+# Ibrahim Tanriover
+wg_width = 450e-9;
+
+lc_vals = [0.1:0.1:0.9]*1e-6; 
+
+N = length(lc_vals); 
+
+FSRs = matrix(N);
+d_wl = matrix(N);
+Q = matrix(N);
+
+for(i=1:N){
+    
+    switchtolayout;
+    Lc = lc_vals(i);
+    
+    setnamed('ring resonator','Lc',Lc);
+
+    run;
+    select('FSR');
+    runanalysis;
+
+    FSRs(i) = getresult('FSR','FSR');
+    d_wl(i) = getresult('FSR','delta_wl');
+    Q(i) = getresult('FSR','Q');
+
+    }
+
+matlabsave('Coupling_length_swp');
+
