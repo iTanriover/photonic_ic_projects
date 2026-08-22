@@ -38,9 +38,9 @@ Q = \frac{\lambda_{\mathrm{res}}}{\Delta\lambda_{\mathrm{FWHM}}}
 
 The measured FSR was approximately 21 nm. The small difference from the target values is attributed mainly to geometric rounding and numerical resolution.
 
-![Resonator transmission](figures/resonator_transmission.png)
+![Resonator transmission](figures/resonator_transmission.jpg)
 
-![Near-resonance field distribution](figures/resonator_field_map.png)
+![Near-resonance field distribution](figures/resonator_field_map.jpg)
 
 ## Design Conclusions
 
