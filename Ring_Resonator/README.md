@@ -11,7 +11,6 @@ The design targets a resonance wavelength of 1550 nm and a free spectral range (
 * Coupling-length comparison
 * Resonance-wavelength and FSR analysis
 * Quality-factor extraction
-* Coupling-length sweep
 * Field-distribution analysis near resonance
 
 ## Design Targets
