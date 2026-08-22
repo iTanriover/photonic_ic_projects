@@ -66,7 +66,7 @@ The initial radius was calculated from the target FSR and then rounded to the av
 
 The initial ring/racetrack structure was simulated using varFDTD to evaluate the approximate transmission response and identify the resonance behavior.
 
-![Initial resonator transmission](figures/initial_varfdtd_transmission.png)
+![Initial resonator transmission](figures/initial_varfdtd_transmission.jpg)
 
 The varFDTD simulation was used to provide an efficient first estimate before full FDTD validation.
 
@@ -88,7 +88,7 @@ L_c = 1,\ 2,\ \mathrm{and}\ 6.4\ \mu\mathrm{m}
 
 The value of (6.4\ \mu\mathrm{m}) corresponds to the approximate 50/50 coupling length obtained previously for a 150 nm gap on the same waveguide platform.
 
-![Coupling-length comparison](figures/coupling_length_comparison.png)
+![Coupling-length comparison](figures/coupling_length_comparison.jpg)
 
 The coupling length controls the strength of interaction between the bus waveguide and the resonator.
 
@@ -125,7 +125,7 @@ Using the approximate values:
 Q_{\mathrm{loaded}} \approx \frac{1552\ \mathrm{nm}}{0.4\ \mathrm{nm}} \approx 3900
 ```
 
-![Initial FDTD transmission](figures/initial_fdtd_transmission.png)
+![Initial FDTD transmission](figures/initial_fdtd_transmission.jpg)
 
 The simulated resonance and FSR are close to the design targets. The small deviations are attributed to:
 
@@ -139,7 +139,7 @@ The simulated resonance and FSR are close to the design targets. The small devia
 
 A coupling-length sweep was performed to study the effect of coupling strength on the resonator response.
 
-![Coupling length sweep](figures/coupling_length_sweep.png)
+![Coupling length sweep](figures/coupling_length_sweep.jpg)
 
 The loaded Q was extracted from the resonance linewidth:
 
@@ -161,7 +161,7 @@ The FSR and resonance wavelength remain comparatively stable during the coupling
 
 A radius sweep was performed to adjust the FSR and resonance wavelength.
 
-![Radius sweep](figures/radius_sweep.png)
+![Radius sweep](figures/radius_sweep.jpg)
 
 The radius primarily determines the round-trip optical path length:
 
@@ -212,13 +212,13 @@ The expected linewidth for a resonance near 1550 nm and loaded Q of approximatel
 
 The final simulated value should be reported from the actual FDTD spectrum.
 
-![Final resonator transmission](figures/final_resonator_transmission.png)
+![Final resonator transmission](figures/final_resonator_transmission.jpg)
 
 ## 10. Near-Resonance Field Distribution
 
 The electric-field distribution was plotted at a wavelength close to resonance to visualize coupling into the ring and circulating field enhancement.
 
-![Near-resonance field distribution](figures/near_resonance_field_map.png)
+![Near-resonance field distribution](figures/near_resonance_field_map.jpg)
 
 The field map illustrates:
 
