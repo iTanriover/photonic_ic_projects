@@ -1,0 +1,55 @@
+### EME parameters
+group_spans    = [1e-6;taper_length+1e-6];   
+cells          = [1;51];#length(xpoints)+1
+subcell_method = [0;1];  
+
+addeme;
+select('EME');
+set('wavelength',1.55e-6);
+set('y min bc','Anti-Symmetric'); # Symmetric BC decrease sim cost
+#set('x',(taper_length)/2);
+set('x min',- 1e-6);
+set('y',0);
+set('y span',size_fme);
+set('z',0);
+set('z span', size_fme);
+
+set('number of cell groups',2);
+set("cells",cells);
+set("group spans",group_spans);
+#set("modes",modes);
+set("subcell method",subcell_method);
+set('allow custom eigensolver settings',1);
+set('modes',[10;10]);#10;50
+
+set('define y mesh by',2);
+set('define z mesh by',2);
+set('mesh cells y',200);
+set('mesh cells z',200);
+
+addemeprofile;
+set('monitor type','2D Z-normal');
+set('name','XY Area');
+set('x', (taper_length-2e-6)/2);
+set('x span', taper_length+2e-6);
+set('y', 0);
+set('y span', size_fme);
+set('z',0);
+
+addemeprofile;
+set('monitor type','2D X-normal');
+set('name','Input_field');
+set('x', 0);
+set('y', 0);
+set('y span', size_fme);
+set('z',0);
+set('z span', size_fme);
+
+addemeprofile;
+set('monitor type','2D X-normal');
+set('name','Outout_field');
+set('x', taper_length+1e-6);
+set('y', 0);
+set('y span', size_fme);
+set('z',0);
+set('z span', size_fme);

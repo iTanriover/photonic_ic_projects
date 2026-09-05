@@ -1,0 +1,19 @@
+wl = 1550e-9;
+switchtolayout;
+select('FDE');
+set('wavelength',wl);
+
+setnamed('coupler','enabled',0);
+
+run;
+findmodes;
+copydcard('mode1');
+
+switchtolayout;
+setnamed('coupler','enabled',1);
+setnamed('SMF','enabled',0);
+
+run;
+findmodes;
+overlap_vals =overlap('mode1','global_mode1');
+## overlap_vals = overlap,power coupling

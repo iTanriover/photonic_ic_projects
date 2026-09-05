@@ -1,0 +1,111 @@
+switchtolayout;
+selectall;
+delete;
+### Fiber parameters
+fiber_length = 100e-6;
+core_index = 1.44 ;
+core_rad = 4.1e-6;
+clad_index = 1.434816;
+clad_rad = 20e-6;
+
+## FDE parameters
+size_fme = clad_rad;
+dy = 100e-9;
+dz = dy;
+num_mesh_y =  size_fme / dy;
+num_mesh_z =  size_fme / dz;
+## TAPER params
+clad_index = 1.44;
+
+wg_in_width = 0.15e-6;
+wg_out_width = 0.45e-6;
+wg_height = 220e-9;
+
+window_height = 20e-6;
+window_width = 50e-6;
+
+taper_length = 300e-6;
+
+## out wg section
+wg_length = 2e-6;
+
+
+xpoints = [0:1e-6:taper_length];
+ypoints = wg_in_width + (wg_out_width - wg_in_width)*(xpoints/taper_length)^2; 
+xpoints_inv = [taper_length:-1e-6:0];
+ypoints_inv = wg_in_width + (wg_out_width - wg_in_width)*(xpoints_inv/taper_length)^2; 
+
+vertices = [xpoints, ypoints/2 ; xpoints_inv,-ypoints_inv/2];
+addpoly;
+set('name', 'Taper');
+set('x',0);
+set('y',0);
+set('z',0);
+set('z span', wg_height);
+set("vertices",vertices);
+set('material','Si (Silicon) - Palik');
+set('override mesh order from material database',1);
+set('mesh order',1);
+
+addrect;
+set('name','cladding');
+#clad_material = 'SiO2 (Glass) - Palik';
+set('index',clad_index);
+set('z',0); set('x min',0); set('y',0);
+set('x max',taper_length+wg_length);
+set('y span',window_width);
+set('z span',window_height);
+set('override mesh order from material database',1);
+set('mesh order',2);
+set('color opacity',0.5);
+
+#add out wg section
+addrect;
+set('name','out_wg');
+set('material','Si (Silicon) - Palik');
+set('z',0); set('x min',taper_length); set('y',0);
+set('x max',taper_length+wg_length);
+set('y span',wg_out_width);
+set('z span',wg_height);
+set('override mesh order from material database',1);
+set('mesh order',1);
+
+select('Taper'); addtogroup('coupler');
+select('cladding'); addtogroup('coupler');
+select('out_wg'); addtogroup('coupler');
+
+### Add the Fiber 
+addcircle;
+set('name','fiber_core');
+set('first axis','z');
+set('rotation 1',90);
+set('second axis','y');
+set('rotation 2',90);
+set('z span', fiber_length);
+set('x',-fiber_length/2);
+set('y',0);
+set('radius',core_rad);
+set('index',core_index);
+set('override mesh order from material database',1);
+set('mesh order',1);
+
+copy;
+set('name','fiber_clad');
+set('radius',clad_rad);
+set('index',clad_index);
+set('override mesh order from material database',1);
+set('mesh order',2);
+
+select('fiber_clad'); addtogroup('SMF');
+select('fiber_core'); addtogroup('SMF');
+
+## ADD FDE
+addfde;
+set('solver type','2D X Normal');
+set('x',0);set('y',0);set('z',0);
+set('y span',clad_rad);
+set('z span',clad_rad);
+set('mesh cells y',num_mesh_y);
+set('mesh cells z',num_mesh_z);
+set('y min bc','Anti-Symmetric');
+

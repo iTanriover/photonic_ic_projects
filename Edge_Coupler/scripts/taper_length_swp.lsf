@@ -1,0 +1,22 @@
+#t_l = [3:2:21]*1e-4;#0.3 to 2.1 mm
+
+t_l = [1.45:0.1:1.55]*1e-3;#0.3 to 2.1 mm
+
+
+T = matrix(length(t_l));
+
+for(i=1:length(t_l)){
+switchtolayout;
+
+taper_length = t_l(i);
+
+set_EME_sim_swp;
+
+run;    
+emepropagate;
+
+s_matrix = getresult('EME','user s matrix');
+T(i) = abs(s_matrix(2,1))^2;
+    }
+    
+matlabsave('Edge_coupler_taper_length_swp_fine');
