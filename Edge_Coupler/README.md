@@ -17,7 +17,7 @@ The taper was designed to expand the tightly confined silicon-waveguide mode and
 | Substrate | Omitted in this initial study |
 | Fiber | SMF-28 |
 | Target wavelength | 1550 nm |
-| Optimized taper length | 1.55 mm |
+| Optimized taper length | 1.45 mm |
 
 The taper width was defined as:
 
