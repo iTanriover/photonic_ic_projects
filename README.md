@@ -37,7 +37,7 @@ S-parameter extraction
 
 See [Summary.md](MMI_Splitter/Summary.md).
 
-## Micro Ring Interferometer
+## Micro Ring Resonator
 Design and analysis of a silicon-photonic Micro Ring Resonator (MMR) at 1550 nm, including:
 
 Group-index-based resonator initial design  
