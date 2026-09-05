@@ -91,7 +91,8 @@ The FDE solver was used to calculate the modes of the oxide-cladded taper and th
 
 The SMF-28 mode was positioned relative to the taper, and the modal overlap was calculated for different fiber positions.
 
-![SMF-28 and taper mode profiles](figures/mode_profiles_overlap.png)
+![SMF-28 profile](figures/SMF_mode_profile.jpg)
+![Taper Input profile](figures/150_mode_profile.jpg)
 
 The calculated modal overlap was approximately 90%.
 
@@ -114,24 +115,19 @@ The EME solver was used to model propagation through the complete taper. This ac
 
 The taper-length sweep was performed from 0.3 mm to 2.1 mm. The initial sweep identified an optimum near 1.5 mm.
 
-![Taper length versus transmission](figures/taper_length_sweep.png)
+![Taper length versus transmission](figures/taper_length_sweep_coarse.jpg)
 
-The taper length was then refined around the initial optimum by testing 1.45 mm and 1.55 mm.
+The taper length was then refined around the initial optimum by testing 1.35 mm and 1.65 mm.
 
-| Taper length | Transmission |
-|---:|---:|
-| 1.45 mm | [Insert value] |
-| 1.50 mm | [Insert value] |
-| 1.55 mm | Approximately 0.99 |
+![Taper length versus transmission](figures/taper_length_sweep_fine.jpg)
 
-The optimized taper length was selected as approximately 1.55 mm, producing approximately 99% transmission.
 
 ## 6. Final transmission and insertion loss
 
 The final EME transmission was approximately:
 
 $$
-T\approx0.99
+T\approx0.98.1
 $$
 
 The corresponding insertion loss was calculated as:
@@ -140,19 +136,9 @@ $$
 \mathrm{IL}=-10\log_{10}(T)
 $$
 
-For $$T=0.99$$:
-
 $$
-\mathrm{IL}\approx0.044\ \mathrm{dB}
+\mathrm{IL}\approx0.083\ \mathrm{dB}
 $$
-
-Therefore, the final simulated result is:
-
-| Metric | Result |
-|---|---:|
-| Final taper length | Approximately 1.55 mm |
-| Transmission | Approximately 99% |
-| Insertion loss | Approximately 0.044 dB |
 
 The reported loss is the simulated transmission loss of the taper. It should not be interpreted as a complete packaged-fiber coupling loss because the current model does not include all practical coupling effects.
 
@@ -167,13 +153,6 @@ The fiber-position optimization demonstrates that:
 - Center alignment maximizes the modal overlap.
 - Lateral displacement reduces the overlap.
 - The optimum position is determined by the symmetry of the taper mode.
-- Alignment tolerance should be evaluated in a future design iteration.
-
-| Position parameter | Result |
-|---|---:|
-| Optimum lateral position | Center |
-| Optimum vertical position | [Insert value] |
-| Maximum modal overlap | Approximately 90% |
 
 ## 8. Simulation procedure
 
@@ -181,12 +160,9 @@ The fiber-position optimization demonstrates that:
 
 The FDE modal-overlap analysis was performed as follows:
 
-1. Open the Lumerical MODE `.lms` file.
-2. Run `set_FDE.lsf`.
-3. Place the SMF-28 mode and taper geometry.
-4. Configure the wavelength and material properties.
-5. Run `overlap_analysis.lsf`.
-6. Record the modal overlap and optimum fiber position.
+1. Open a Lumerical MODE `.lms` file.
+2. Run `set_FDE.lsf` to place the SMF-28 mode and taper geometry.
+3. Run `overlap_analysis.lsf` to calculate the modal overlap.
 
 ### 8.2 EME setup
 
@@ -204,15 +180,13 @@ The EME model was created as follows:
 
 The taper-length sweep was performed as follows:
 
-1. Open the Lumerical MODE `.lms` file.
-2. Open `set_EME_sim_swp.lsf`.
+1. Open a Lumerical MODE `.lms` file.
+2. Open `taper_length_swp.lsf`.
 3. Enter the desired taper-length range and step size.
 4. Run the script.
-5. Run the EME propagation simulation for each sweep point.
-6. Extract the transmission.
-7. Plot taper length against transmission.
-8. Select the optimum taper length.
-9. Perform a finer sweep around the optimum.
+5. Plot taper length against transmission.
+6. Select the optimum taper length.
+7. Perform a finer sweep around the optimum.
 
 ## 9. Design interpretation
 
