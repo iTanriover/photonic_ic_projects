@@ -46,3 +46,14 @@ Coupling-length analysis
 Resonance-wavelength, FSR, and Quality-factor targeted final design  
 
 See [Summary.md](Ring_Resonator/Summary.md).
+
+## Edge Coupler
+Design and analysis of a silicon-photonic parabolic inverse-taper edge coupler at 1550 nm, including:
+
+FDE modal-overlap analysis with an SMF-28 fiber  
+Fiber-position optimization  
+EME taper-length sweep  
+Fine taper-length optimization  
+Transmission and insertion-loss extraction  
+Final electric-field visualization  
+See [Summary.md](Edge_Coupler/SUMMARY.md).
