@@ -1,0 +1,63 @@
+lambda =1550e-9;
+f0 = c / lambda;
+FSRnm = 25e-9; # FSR in nm
+FSR = c/(lambda-FSRnm/2) - c/(lambda+FSRnm/2); # calculate FSR in freq
+ng = 4.293303;
+neff = 2.291852;
+
+#The wavegude length
+deltal = c / FSR  / ng;
+
+teta0 = 0.4664;
+teta1 = 0.1591;
+teta2 = 0.3755;
+teta3 = 0.25;
+
+#Phase shift multiplier
+
+phi1 = 0;
+phi2 = 1;
+phi3 = 0;
+
+#constant phase shift
+shift = f0 / c * deltal * ( neff - ng );
+l_correction = (shift - round(shift))/( f0 / c * ( neff - ng ));
+deltal = deltal - l_correction;
+#The wavegude length
+deltal1 = 2*deltal + phi1 * c /(2*f0*(neff));
+deltal2 = 2*deltal + phi2 * c /(2*f0*(neff));
+deltal3 = deltal + phi3 * c /(2*f0*(neff));
+
+
+#Coupling coefficients
+r0 = sin( teta0 * pi ) ^ 2;
+r1 = sin( teta1 * pi ) ^ 2;
+r2 = sin( teta2 * pi ) ^ 2;
+r3 = sin( teta3 * pi ) ^ 2;
+
+#r0 = 0.1464;r1 = 0.5;r2 = 0.8536;r3 = 0.5;
+
+switchtodesign;
+
+setnamed("WC1","coupling coefficient 1",r0);
+
+setnamed("SW1","frequency",f0);
+setnamed("SW1","length",deltal1);
+setnamed("SW1","group index 1",ng);
+setnamed("SW1","effective index 1",neff);
+
+setnamed("WC2","coupling coefficient 1",r1);
+
+setnamed("SW2","frequency",f0);
+setnamed("SW2","length",deltal2);
+setnamed("SW2","group index 1",ng);
+setnamed("SW2","effective index 1",neff);
+
+setnamed("WC3","coupling coefficient 1",r2);
+
+setnamed("SW3","frequency",f0);
+setnamed("SW3","length",deltal3);
+setnamed("SW3","group index 1",ng);
+setnamed("SW3","effective index 1",neff);
+
+setnamed("WC4","coupling coefficient 1",r3);
