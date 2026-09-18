@@ -1,5 +1,5 @@
 Photonic Integrated Circuit Design Projects
-This repository contains sample photonic-device designs and simulations developed using Ansys Lumerical MODE(FDE, EME)/FDTD, MATLAB, and related photonic-design tools.
+This repository contains sample photonic-device designs and simulations developed using Ansys Lumerical MODE(FDE, EME)/FDTD/INTERCONNECT, MATLAB, and related photonic-design tools.
 # Projects
 ## Directional Coupler
 Design and analysis of a silicon-photonic directional coupler near 1550 nm, including:
@@ -57,3 +57,10 @@ Fine taper-length optimization
 Transmission and insertion-loss extraction  
 Final electric-field visualization  
 See [Summary.md](Edge_Coupler/SUMMARY.md).
+
+## Optical Half-Band FIR Filter
+
+INTERCONNECT circuit-level simulation of a three-MZI optical half-band finite-impulse-response (FIR) filter based on the lattice architecture reported by Jinguji and Oguma.  
+The design was adapted to the silicon-photonic platform used in the previous component-design projects and updated for 1550 nm central wavelength and 25 nm FSR.
+ 
+See [README.md](half_band_filter/README.md).
